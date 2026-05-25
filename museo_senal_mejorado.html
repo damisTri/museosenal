@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Señal del Pasado · Museo del Celular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Josefin+Sans:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Josefin Sans',sans-serif;background:#fdf6f9;overscroll-behavior:none;}
+#app{max-width:480px;margin:0 auto;min-height:100vh;}
+
+/* ── PORTADA ── */
+#portada{background:linear-gradient(160deg,#f9eef5 0%,#f2e6f0 60%,#ece0f5 100%);padding:2.5rem 1.4rem 2rem;text-align:center;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:center;}
+#portada::before{content:'✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';position:absolute;top:10px;left:0;right:0;font-size:8px;color:rgba(200,150,180,0.35);letter-spacing:4px;}
+#portada::after{content:'✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';position:absolute;bottom:10px;left:0;right:0;font-size:8px;color:rgba(200,150,180,0.35);letter-spacing:4px;}
+.badge-p{display:inline-block;border:1px solid rgba(200,150,180,0.5);color:#c090b0;font-size:9px;letter-spacing:3px;padding:4px 14px;margin-bottom:1rem;}
+.titulo-p{font-family:'Great Vibes',cursive;font-size:3rem;color:#7a4060;line-height:1.1;margin-bottom:0.2rem;}
+.titulo-p2{font-family:'Great Vibes',cursive;font-size:1.7rem;color:#a06080;line-height:1.2;margin-bottom:0.6rem;}
+.sub-p{font-size:9px;color:#b090a8;letter-spacing:3px;margin-bottom:0.8rem;}
+.floreo{font-size:11px;color:rgba(180,120,160,0.4);letter-spacing:8px;margin-bottom:1rem;}
+.desc-p{font-size:0.78rem;color:#a07888;line-height:1.7;margin-bottom:1.5rem;}
+.sel-lbl{font-size:9px;color:#b090a8;letter-spacing:3px;margin-bottom:0.9rem;}
+
+.gen-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:340px;margin:0 auto;}
+.gen-card{border:none;border-radius:18px;padding:16px 12px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.gen-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
+.gen-card:active{transform:scale(0.96);}
+.gc1{background:#f7d6e0;border:1.5px solid rgba(220,160,180,0.5);}
+.gc2{background:#e8d5f0;border:1.5px solid rgba(195,155,215,0.5);}
+.gc3{background:#d5e8f5;border:1.5px solid rgba(150,185,220,0.5);}
+.gc4{background:#d5f0e8;border:1.5px solid rgba(140,200,175,0.5);}
+.gc5{background:#fdebd0;border:1.5px solid rgba(230,185,130,0.5);grid-column:1/-1;}
+.gc-gen{font-family:'Great Vibes',cursive;font-size:2rem;}
+.gc1 .gc-gen{color:#b05070;}.gc2 .gc-gen{color:#7050a0;}.gc3 .gc-gen{color:#4070a0;}.gc4 .gc-gen{color:#307060;}.gc5 .gc-gen{color:#906020;}
+.gc-anio{font-size:9px;letter-spacing:2px;margin-top:2px;}
+.gc1 .gc-anio{color:#c08090;}.gc2 .gc-anio{color:#9070b0;}.gc3 .gc-anio{color:#6090b0;}.gc4 .gc-anio{color:#509080;}.gc5 .gc-anio{color:#a08040;}
+.gc-nom{font-size:9px;margin-top:4px;opacity:0.7;}
+.gc1 .gc-nom{color:#7a3050;}.gc2 .gc-nom{color:#503080;}.gc3 .gc-nom{color:#204060;}.gc4 .gc-nom{color:#185840;}.gc5 .gc-nom{color:#704810;}
+
+/* ── EXHIBIT ── */
+#exhibit{display:none;min-height:100vh;}
+.ex-rose{background:#fef6f8;color:#5a2535;}
+.ex-lav{background:#f8f3fe;color:#3a2055;}
+.ex-blue{background:#f3f8fe;color:#1a3555;}
+.ex-mint{background:#f3fef8;color:#1a4535;}
+.ex-peach{background:#fef8f0;color:#55350a;}
+
+/* Headers */
+.hdr-rose{background:linear-gradient(135deg,#f9dde8,#f0c8d8);padding:1.2rem 1.4rem;text-align:center;border-bottom:1px solid rgba(220,160,180,0.4);position:relative;}
+.hdr-lav{background:linear-gradient(135deg,#ecddf8,#dfc8f0);padding:1.2rem 1.4rem;text-align:center;border-bottom:1px solid rgba(195,155,215,0.4);position:relative;}
+.hdr-blue{background:linear-gradient(135deg,#d8eaf8,#c5dcf0);padding:1.2rem 1.4rem;text-align:center;border-bottom:1px solid rgba(150,185,220,0.4);position:relative;}
+.hdr-mint{background:linear-gradient(135deg,#d8f5e8,#c0e8d5);padding:1.2rem 1.4rem;text-align:center;border-bottom:1px solid rgba(140,200,175,0.4);position:relative;}
+.hdr-peach{background:linear-gradient(135deg,#fcebd0,#f5d8b0);padding:1.2rem 1.4rem;text-align:center;border-bottom:1px solid rgba(230,185,130,0.4);position:relative;}
+
+.hdr-deco{font-size:9px;letter-spacing:4px;margin-bottom:6px;}
+.hdr-rose .hdr-deco{color:rgba(200,120,150,0.55);}.hdr-lav .hdr-deco{color:rgba(170,110,200,0.55);}.hdr-blue .hdr-deco{color:rgba(100,150,200,0.55);}.hdr-mint .hdr-deco{color:rgba(90,170,140,0.55);}.hdr-peach .hdr-deco{color:rgba(195,145,80,0.55);}
+.lbl-gen{font-size:9px;letter-spacing:3px;margin-bottom:4px;}
+.hdr-rose .lbl-gen{color:#c06880;}.hdr-lav .lbl-gen{color:#8050a8;}.hdr-blue .lbl-gen{color:#4070a8;}.hdr-mint .lbl-gen{color:#308068;}.hdr-peach .lbl-gen{color:#a07020;}
+.tit-hdr{font-family:'Great Vibes',cursive;font-size:2.1rem;margin-bottom:3px;}
+.hdr-rose .tit-hdr{color:#7a3050;}.hdr-lav .tit-hdr{color:#503080;}.hdr-blue .tit-hdr{color:#204880;}.hdr-mint .tit-hdr{color:#185848;}.hdr-peach .tit-hdr{color:#704810;}
+.sub-hdr{font-size:10px;letter-spacing:1px;}
+.hdr-rose .sub-hdr{color:#c08090;}.hdr-lav .sub-hdr{color:#9070b0;}.hdr-blue .sub-hdr{color:#6088b0;}.hdr-mint .sub-hdr{color:#509078;}.hdr-peach .sub-hdr{color:#b08840;}
+
+/* Timeline */
+.timeline{display:flex;align-items:center;padding:0.85rem 1.4rem;background:rgba(255,255,255,0.5);}
+.tl-d{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;cursor:pointer;flex-shrink:0;transition:transform 0.2s,box-shadow 0.2s;border:1.5px solid transparent;}
+.tl-d:hover{transform:scale(1.15);}
+.tl-1{background:#f7d6e0;color:#b05070;border-color:#e8b0c0;}
+.tl-2{background:#e8d5f0;color:#7050a0;border-color:#c8a8e0;}
+.tl-3{background:#d5e8f5;color:#4070a0;border-color:#a8c8e8;}
+.tl-4{background:#d5f0e8;color:#307060;border-color:#a0d8c0;}
+.tl-5{background:#fdebd0;color:#906020;border-color:#e8c888;}
+.tl-d.cur{transform:scale(1.35);box-shadow:0 0 0 4px rgba(200,160,180,0.3);}
+.tl-l{flex:1;height:1.5px;background:rgba(200,160,180,0.2);}
+.tl-l.p{background:rgba(200,160,180,0.5);}
+
+/* Tabs */
+.tabs-row{display:flex;margin:0 1.4rem;}
+.tabs-rose{border-bottom:1px solid rgba(220,160,180,0.35);}
+.tabs-lav{border-bottom:1px solid rgba(195,155,215,0.35);}
+.tabs-blue{border-bottom:1px solid rgba(150,185,220,0.35);}
+.tabs-mint{border-bottom:1px solid rgba(140,200,175,0.35);}
+.tabs-peach{border-bottom:1px solid rgba(230,185,130,0.35);}
+.tb{flex:1;padding:9px 4px;font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;background:none;border:none;cursor:pointer;border-bottom:2.5px solid transparent;transition:all 0.2s;text-transform:uppercase;}
+.tb-rose{color:#c090a0;}.tb-rose.act{color:#7a3050;border-bottom-color:#c06880;background:rgba(220,160,180,0.1);}
+.tb-lav{color:#a080c0;}.tb-lav.act{color:#503080;border-bottom-color:#8050a8;background:rgba(195,155,215,0.1);}
+.tb-blue{color:#7098b8;}.tb-blue.act{color:#204880;border-bottom-color:#4070a8;background:rgba(150,185,220,0.1);}
+.tb-mint{color:#60a888;}.tb-mint.act{color:#185848;border-bottom-color:#308068;background:rgba(140,200,175,0.1);}
+.tb-peach{color:#c09850;}.tb-peach.act{color:#704810;border-bottom-color:#a07020;background:rgba(230,185,130,0.1);}
+.tab-pnl{display:none;padding:1rem 1.4rem;}
+.tab-pnl.act{display:block;animation:fadeUp 0.3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.deco-div{text-align:center;font-size:11px;letter-spacing:6px;margin:0.2rem 0 0.8rem;}
+.dv-rose{color:rgba(200,130,155,0.4);}.dv-lav{color:rgba(170,120,200,0.4);}.dv-blue{color:rgba(110,155,200,0.4);}.dv-mint{color:rgba(100,175,145,0.4);}.dv-peach{color:rgba(200,150,90,0.4);}
+
+/* Vitrina */
+.vit{border-radius:16px;padding:1rem;display:flex;gap:12px;align-items:center;margin-bottom:0.9rem;}
+.vit-rose{background:#fdeef3;border:1px solid rgba(220,160,180,0.35);}
+.vit-lav{background:#f3ecfd;border:1px solid rgba(195,155,215,0.35);}
+.vit-blue{background:#ecf4fd;border:1px solid rgba(150,185,220,0.35);}
+.vit-mint{background:#ecfdf4;border:1px solid rgba(140,200,175,0.35);}
+.vit-peach{background:#fdf5e8;border:1px solid rgba(230,185,130,0.35);}
+.ph-ico{width:62px;height:78px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;flex-shrink:0;}
+.ph-rose{background:#f7d6e0;border:1px solid rgba(220,160,180,0.4);}
+.ph-lav{background:#e8d5f0;border:1px solid rgba(195,155,215,0.4);}
+.ph-blue{background:#d5e8f5;border:1px solid rgba(150,185,220,0.4);}
+.ph-mint{background:#d5f0e8;border:1px solid rgba(140,200,175,0.4);}
+.ph-peach{background:#fdebd0;border:1px solid rgba(230,185,130,0.4);}
+.ph-nom{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:4px;}
+.ph-rose .ph-nom{color:#7a3050;}.ph-lav .ph-nom{color:#503080;}.ph-blue .ph-nom{color:#204880;}.ph-mint .ph-nom{color:#185848;}.ph-peach .ph-nom{color:#704810;}
+.ph-desc{font-size:11px;line-height:1.5;opacity:0.75;}
+
+/* Datos */
+.datos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0.9rem;}
+.dat{border-radius:12px;padding:10px 8px;text-align:center;}
+.dat-rose{background:#fdeef3;border:1px solid rgba(220,160,180,0.3);}
+.dat-lav{background:#f3ecfd;border:1px solid rgba(195,155,215,0.3);}
+.dat-blue{background:#ecf4fd;border:1px solid rgba(150,185,220,0.3);}
+.dat-mint{background:#ecfdf4;border:1px solid rgba(140,200,175,0.3);}
+.dat-peach{background:#fdf5e8;border:1px solid rgba(230,185,130,0.3);}
+.d-val{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;}
+.dat-rose .d-val{color:#a04060;}.dat-lav .d-val{color:#6040a0;}.dat-blue .d-val{color:#305890;}.dat-mint .d-val{color:#206850;}.dat-peach .d-val{color:#906020;}
+.d-lab{font-size:9px;margin-top:2px;opacity:0.65;}
+
+/* Curiosidad */
+.curi{border-radius:14px;padding:0.95rem 1rem;font-family:'Cormorant Garamond',serif;font-size:0.88rem;font-style:italic;line-height:1.65;position:relative;margin-bottom:0.5rem;}
+.curi-rose{background:#fdeef3;border-left:3px solid #e8a8be;color:#6a3045;}
+.curi-lav{background:#f3ecfd;border-left:3px solid #c8a8e0;color:#4a3070;}
+.curi-blue{background:#ecf4fd;border-left:3px solid #a0c0e0;color:#204060;}
+.curi-mint{background:#ecfdf4;border-left:3px solid #90d0b8;color:#185840;}
+.curi-peach{background:#fdf5e8;border-left:3px solid #e0c080;color:#604010;}
+.curi::before{content:'" ';font-size:2rem;line-height:0;vertical-align:-10px;font-family:'Cormorant Garamond',serif;}
+.curi-rose::before{color:#e8a8be;}.curi-lav::before{color:#c8a8e0;}.curi-blue::before{color:#a0c0e0;}.curi-mint::before{color:#90d0b8;}.curi-peach::before{color:#e0c080;}
+
+/* Quiz */
+.quiz-box{border-radius:14px;padding:0.9rem;margin-top:0.8rem;}
+.quiz-rose{background:#fff0f5;border:1px solid rgba(220,160,180,0.3);}
+.quiz-lav{background:#f8f0ff;border:1px solid rgba(195,155,215,0.3);}
+.quiz-blue{background:#f0f6ff;border:1px solid rgba(150,185,220,0.3);}
+.quiz-mint{background:#f0fff8;border:1px solid rgba(140,200,175,0.3);}
+.quiz-peach{background:#fff8f0;border:1px solid rgba(230,185,130,0.3);}
+.quiz-lbl{font-size:9px;letter-spacing:2px;margin-bottom:8px;opacity:0.6;text-transform:uppercase;}
+.quiz-q{font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-weight:600;margin-bottom:10px;line-height:1.4;}
+.quiz-opts{display:flex;flex-direction:column;gap:6px;}
+.quiz-opt{border:none;border-radius:10px;padding:8px 12px;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.5px;cursor:pointer;text-align:left;transition:all 0.2s;}
+.qo-rose{background:#f7d6e0;color:#7a3050;}.qo-rose:hover{background:#f0c0d0;}
+.qo-lav{background:#e8d5f0;color:#503080;}.qo-lav:hover{background:#dcc5e8;}
+.qo-blue{background:#d5e8f5;color:#204880;}.qo-blue:hover{background:#c5dcf0;}
+.qo-mint{background:#d5f0e8;color:#185848;}.qo-mint:hover{background:#c0e8d8;}
+.qo-peach{background:#fdebd0;color:#704810;}.qo-peach:hover{background:#f8ddb8;}
+.quiz-opt.correct{background:#d5f0e8;color:#185848;border:1.5px solid #90d0b8;}
+.quiz-opt.wrong{background:#fdeef3;color:#6a2035;border:1.5px solid #e8a8be;opacity:0.6;}
+.quiz-result{margin-top:10px;font-size:12px;font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.5;display:none;padding:8px;border-radius:8px;}
+.res-ok{background:#ecfdf4;color:#185840;border-left:3px solid #90d0b8;}
+.res-no{background:#fdeef3;color:#6a3045;border-left:3px solid #e8a8be;}
+
+/* Empresa */
+.emp-card{border-radius:16px;padding:1rem;display:flex;gap:12px;align-items:center;margin-bottom:0.9rem;}
+.ec-rose{background:#fdeef3;border:1px solid rgba(220,160,180,0.35);}
+.ec-lav{background:#f3ecfd;border:1px solid rgba(195,155,215,0.35);}
+.ec-blue{background:#ecf4fd;border:1px solid rgba(150,185,220,0.35);}
+.ec-mint{background:#ecfdf4;border:1px solid rgba(140,200,175,0.35);}
+.ec-peach{background:#fdf5e8;border:1px solid rgba(230,185,130,0.35);}
+.e-ico{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.ei-rose{background:#f7d6e0;border:1.5px solid rgba(220,160,180,0.4);}
+.ei-lav{background:#e8d5f0;border:1.5px solid rgba(195,155,215,0.4);}
+.ei-blue{background:#d5e8f5;border:1.5px solid rgba(150,185,220,0.4);}
+.ei-mint{background:#d5f0e8;border:1.5px solid rgba(140,200,175,0.4);}
+.ei-peach{background:#fdebd0;border:1.5px solid rgba(230,185,130,0.4);}
+.e-nom{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;}
+.ec-rose .e-nom{color:#7a3050;}.ec-lav .e-nom{color:#503080;}.ec-blue .e-nom{color:#204880;}.ec-mint .e-nom{color:#185848;}.ec-peach .e-nom{color:#704810;}
+.e-fun{font-size:10px;letter-spacing:0.5px;margin-top:2px;opacity:0.65;}
+.e-txt{border-radius:12px;padding:0.85rem;font-family:'Cormorant Garamond',serif;font-size:0.84rem;line-height:1.7;}
+.et-rose{background:#fdf5f8;border:1px solid rgba(220,160,180,0.2);color:#6a3045;}
+.et-lav{background:#f8f3fe;border:1px solid rgba(195,155,215,0.2);color:#4a3070;}
+.et-blue{background:#f3f8fe;border:1px solid rgba(150,185,220,0.2);color:#204060;}
+.et-mint{background:#f3fef8;border:1px solid rgba(140,200,175,0.2);color:#185840;}
+.et-peach{background:#fef8f0;border:1px solid rgba(230,185,130,0.2);color:#604010;}
+
+/* ── MÚSICA ── */
+.mus-card{border-radius:14px;padding:1rem;margin-bottom:0.9rem;}
+.mc-rose{background:#fdeef3;border:1px solid rgba(220,160,180,0.3);}
+.mc-lav{background:#f3ecfd;border:1px solid rgba(195,155,215,0.3);}
+.mc-blue{background:#ecf4fd;border:1px solid rgba(150,185,220,0.3);}
+.mc-mint{background:#ecfdf4;border:1px solid rgba(140,200,175,0.3);}
+.mc-peach{background:#fdf5e8;border:1px solid rgba(230,185,130,0.3);}
+.m-era-label{font-size:9px;letter-spacing:3px;margin-bottom:6px;opacity:0.55;text-transform:uppercase;}
+.m-tit{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:2px;}
+.mc-rose .m-tit{color:#7a3050;}.mc-lav .m-tit{color:#503080;}.mc-blue .m-tit{color:#204880;}.mc-mint .m-tit{color:#185848;}.mc-peach .m-tit{color:#704810;}
+.m-era{font-size:10px;opacity:0.6;margin-bottom:10px;}
+.songs-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.song-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:10px;cursor:pointer;transition:all 0.18s;font-size:12px;}
+.si-rose{background:#fff0f5;color:#7a3050;border:1px solid rgba(220,160,180,0.2);}
+.si-lav{background:#f8f0ff;color:#503080;border:1px solid rgba(195,155,215,0.2);}
+.si-blue{background:#f0f6ff;color:#204880;border:1px solid rgba(150,185,220,0.2);}
+.si-mint{background:#f0fff8;color:#185848;border:1px solid rgba(140,200,175,0.2);}
+.si-peach{background:#fff8f0;color:#704810;border:1px solid rgba(230,185,130,0.2);}
+.song-item:hover{transform:translateX(3px);}
+.song-item.playing{font-weight:600;}
+.si-rose.playing{background:#f7d6e0;border-color:rgba(220,160,180,0.5);}
+.si-lav.playing{background:#e8d5f0;border-color:rgba(195,155,215,0.5);}
+.si-blue.playing{background:#d5e8f5;border-color:rgba(150,185,220,0.5);}
+.si-mint.playing{background:#d5f0e8;border-color:rgba(140,200,175,0.5);}
+.si-peach.playing{background:#fdebd0;border-color:rgba(230,185,130,0.5);}
+.s-icon{font-size:15px;flex-shrink:0;}
+.s-info{flex:1;}
+.s-name{font-size:12px;line-height:1.2;}
+.s-artist{font-size:10px;opacity:0.6;}
+.s-dur{font-size:10px;opacity:0.5;flex-shrink:0;}
+.yt-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-top:2px;}
+.yt-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:12px;}
+.yt-note{font-size:10px;opacity:0.55;margin-top:6px;font-family:'Cormorant Garamond',serif;font-style:italic;text-align:center;}
+
+/* Nav */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.4rem;}
+.nb{border:none;border-radius:22px;padding:8px 18px;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;color:white;}
+.nb:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.nb.dis{opacity:0.25;cursor:default;transform:none!important;}
+.nb-rose{background:#d07090;}.nb-lav{background:#9060c0;}.nb-blue{background:#5080c0;}.nb-mint{background:#408878;}.nb-peach{background:#c08030;}
+.dots{display:flex;gap:6px;align-items:center;}
+.dot{width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all 0.25s;opacity:0.3;}
+.dot.a{opacity:1;width:9px;height:9px;}
+.d1{background:#d07090;}.d2{background:#9060c0;}.d3{background:#5080c0;}.d4{background:#408878;}.d5{background:#c08030;}
+.cerrar{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 1.4rem 1.8rem;padding:10px;border:none;border-radius:22px;font-size:12px;font-weight:600;cursor:pointer;width:calc(100% - 2.8rem);letter-spacing:1px;color:white;transition:all 0.2s;}
+.cerrar:hover{filter:brightness(1.08);}
+.cerr-rose{background:#d07090;}.cerr-lav{background:#9060c0;}.cerr-blue{background:#5080c0;}.cerr-mint{background:#408878;}.cerr-peach{background:#c08030;}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="portada">
+  <div style="font-size:1.6rem;margin-bottom:0.5rem;letter-spacing:6px;color:rgba(180,120,155,0.45)">✿ ✦ ✿</div>
+  <div class="badge-p">MUSEO VIRTUAL · EDICIÓN 2025</div>
+  <div class="titulo-p">Señal del Pasado</div>
+  <div class="titulo-p2">una historia en tu mano</div>
+  <div class="sub-p">LA EVOLUCIÓN DEL CELULAR · 1G A 5G</div>
+  <div class="floreo">~ ✦ ~</div>
+  <p class="desc-p">Del Motorola DynaTAC al iPhone 16<br>cinco generaciones que cambiaron el mundo</p>
+  <p class="sel-lbl">✿ ELIGE UNA SALA PARA ENTRAR ✿</p>
+  <div class="gen-grid">
+    <div class="gen-card gc1" onclick="abrir(0)">
+      <div class="gc-gen">1G</div>
+      <div class="gc-anio">· 1979 ·</div>
+      <div class="gc-nom">Motorola DynaTAC</div>
+    </div>
+    <div class="gen-card gc2" onclick="abrir(1)">
+      <div class="gc-gen">2G</div>
+      <div class="gc-anio">· 1991 ·</div>
+      <div class="gc-nom">Nokia 1011</div>
+    </div>
+    <div class="gen-card gc3" onclick="abrir(2)">
+      <div class="gc-gen">3G</div>
+      <div class="gc-anio">· 2001 ·</div>
+      <div class="gc-nom">BlackBerry 6210</div>
+    </div>
+    <div class="gen-card gc4" onclick="abrir(3)">
+      <div class="gc-gen">4G</div>
+      <div class="gc-anio">· 2009 ·</div>
+      <div class="gc-nom">iPhone 4</div>
+    </div>
+    <div class="gen-card gc5" onclick="abrir(4)">
+      <div class="gc-gen">5G</div>
+      <div class="gc-anio">· 2019 ·</div>
+      <div class="gc-nom">iPhone 16 · Galaxy S25</div>
+    </div>
+  </div>
+</div>
+<div id="exhibit"></div>
+</div>
+
+<script>
+const PAL=[
+  {hdr:'hdr-rose',ex:'ex-rose',vit:'vit-rose',ph:'ph-rose',dat:'dat-rose',curi:'curi-rose',ec:'ec-rose',ei:'ei-rose',et:'et-rose',mc:'mc-rose',nb:'nb-rose',cerr:'cerr-rose',tb:'tb-rose',tabs:'tabs-rose',dv:'dv-rose',tl:'tl-1',dot:'d1',si:'si-rose',qi:'qo-rose',quiz:'quiz-rose'},
+  {hdr:'hdr-lav',ex:'ex-lav',vit:'vit-lav',ph:'ph-lav',dat:'dat-lav',curi:'curi-lav',ec:'ec-lav',ei:'ei-lav',et:'et-lav',mc:'mc-lav',nb:'nb-lav',cerr:'cerr-lav',tb:'tb-lav',tabs:'tabs-lav',dv:'dv-lav',tl:'tl-2',dot:'d2',si:'si-lav',qi:'qo-lav',quiz:'quiz-lav'},
+  {hdr:'hdr-blue',ex:'ex-blue',vit:'vit-blue',ph:'ph-blue',dat:'dat-blue',curi:'curi-blue',ec:'ec-blue',ei:'ei-blue',et:'et-blue',mc:'mc-blue',nb:'nb-blue',cerr:'cerr-blue',tb:'tb-blue',tabs:'tabs-blue',dv:'dv-blue',tl:'tl-3',dot:'d3',si:'si-blue',qi:'qo-blue',quiz:'quiz-blue'},
+  {hdr:'hdr-mint',ex:'ex-mint',vit:'vit-mint',ph:'ph-mint',dat:'dat-mint',curi:'curi-mint',ec:'ec-mint',ei:'ei-mint',et:'et-mint',mc:'mc-mint',nb:'nb-mint',cerr:'cerr-mint',tb:'tb-mint',tabs:'tabs-mint',dv:'dv-mint',tl:'tl-4',dot:'d4',si:'si-mint',qi:'qo-mint',quiz:'quiz-mint'},
+  {hdr:'hdr-peach',ex:'ex-peach',vit:'vit-peach',ph:'ph-peach',dat:'dat-peach',curi:'curi-peach',ec:'ec-peach',ei:'ei-peach',et:'et-peach',mc:'mc-peach',nb:'nb-peach',cerr:'cerr-peach',tb:'tb-peach',tabs:'tabs-peach',dv:'dv-peach',tl:'tl-5',dot:'d5',si:'si-peach',qi:'qo-peach',quiz:'quiz-peach'}
+];
+
+// YouTube playlist IDs — canciones reales de cada era
+const SONGS=[
+  [ // 1G · Años 80
+    {name:"Thriller",artist:"Michael Jackson",yt:"sOnqjkJTMaA",dur:"5:57"},
+    {name:"Eye of the Tiger",artist:"Survivor",yt:"btPJPFnesV4",dur:"4:04"},
+    {name:"Take On Me",artist:"a-ha",yt:"djV11Xbc914",dur:"3:46"},
+  ],
+  [ // 2G · Años 90
+    {name:"Livin' la Vida Loca",artist:"Ricky Martin",yt:"p47fEXGabaY",dur:"4:03"},
+    {name:"Baby One More Time",artist:"Britney Spears",yt:"C-u5WLJ9Yk4",dur:"3:30"},
+    {name:"MMMBop",artist:"Hanson",yt:"NHozn0YXAeE",dur:"4:00"},
+  ],
+  [ // 3G · 2000s
+    {name:"Crazy in Love",artist:"Beyoncé ft. Jay-Z",yt:"ViwtNLUqkMY",dur:"3:56"},
+    {name:"Yeah!",artist:"Usher ft. Lil Jon",yt:"GxBSyx85Kp8",dur:"4:12"},
+    {name:"In Da Club",artist:"50 Cent",yt:"5qm8PH4xAss",dur:"3:44"},
+  ],
+  [ // 4G · 2010s
+    {name:"Despacito",artist:"Luis Fonsi ft. Daddy Yankee",yt:"ktvTqknDobU",dur:"4:42"},
+    {name:"Shape of You",artist:"Ed Sheeran",yt:"JGwWNGJdvx8",dur:"4:24"},
+    {name:"Uptown Funk",artist:"Bruno Mars ft. Mark Ronson",yt:"OPf0YbXqDm0",dur:"4:30"},
+  ],
+  [ // 5G · 2020s
+    {name:"Flowers",artist:"Miley Cyrus",yt:"G7KNmW9a75Y",dur:"3:20"},
+    {name:"Unholy",artist:"Sam Smith ft. Kim Petras",yt:"Uq9gPaIzbe8",dur:"2:37"},
+    {name:"As It Was",artist:"Harry Styles",yt:"H5v3kku4y6Q",dur:"2:37"},
+  ]
+];
+
+const QUIZ=[
+  {q:"¿Cuánto pesaba el Motorola DynaTAC 8000X?",opts:["200 gramos","1 kilogramo","500 gramos","2 kilogramos"],ans:1,exp:"¡Correcto! Pesaba exactamente 1 kilogramo. Era como cargar una botella de agua llena al oído."},
+  {q:"¿Qué decía el primer SMS de la historia?",opts:["Hola Mundo","Te quiero","Feliz Navidad","Llegué bien"],ans:2,exp:"¡Exacto! Neil Papworth envió 'Feliz Navidad' el 3 de diciembre de 1992, desde su computadora."},
+  {q:"¿A quién apodaban 'CrackBerry' por su adicción?",opts:["Al Nokia 3310","Al Motorola RAZR","Al BlackBerry","Al iPhone 3G"],ans:2,exp:"¡Sí! El BlackBerry era tan adictivo que le pusieron ese apodo. Hasta Obama se negó a deshacerse del suyo."},
+  {q:"¿En qué año llegó el 4G LTE a El Salvador por primera vez?",opts:["2010","2013","2015","2018"],ans:1,exp:"¡Correcto! Tigo lanzó la primera red 4G en El Salvador en 2013, siendo pioneros en Centroamérica."},
+  {q:"¿Cuál es la latencia del 5G?",opts:["100 milisegundos","50 milisegundos","10 milisegundos","1 milisegundo"],ans:3,exp:"¡Exacto! 1 milisegundo. Eso permite operar robots quirúrgicos en tiempo real desde otra ciudad."}
+];
+
+const G=[
+  {gen:"1G",anio:"1979",tit:"La era analógica",sub:"Solo voz · Sin SMS · Sin internet",
+   ph:"📡",phN:"Motorola DynaTAC 8000X",phD:"1 kg · Antena telescópica · 30 min batería · $3,995 USD",
+   emp:"🔴",empN:"Motorola",empF:"Paul Galvin · Chicago, EE.UU. · 1928",
+   empT:"Martin Cooper, ingeniero de Motorola, hizo la primera llamada celular el 3 de abril de 1973. Llamó a su rival en AT&T para avisarle que lo había logrado primero. Cooper es el padre del teléfono celular.",
+   datos:[{v:"1 kg",l:"Peso"},{v:"30 min",l:"Batería"},{v:"$3,995",l:"Precio"},{v:"VOZ",l:"Solo llamadas"}],
+   curi:"Martin Cooper llamó a su rival de AT&T como primera llamada de la historia. Así comenzó todo.",
+   musT:"Cassettes y radio AM/FM · años 80",musE:"DISCO & NEW WAVE · 1979",tec:"Analógico · AMPS · 800 MHz"},
+  {gen:"2G",anio:"1991",tit:"Nace el SMS",sub:"Digital · GSM · El primer texto",
+   ph:"📟",phN:"Nokia 1011",phD:"Primer teléfono GSM · Display LCD · Nokia, Finlandia",
+   emp:"🔵",empN:"Nokia",empF:"Fundada en 1865 · Espoo, Finlandia",
+   empT:"Nokia comenzó fabricando papel, luego cables y botas de goma. En los 90s dominó el mercado celular con el 40% de ventas mundiales. Su Nokia 3310 se volvió leyenda por indestructible.",
+   datos:[{v:"160",l:"Caracteres SMS"},{v:"9.6kbps",l:"Velocidad"},{v:"GSM",l:"Tecnología"},{v:"SMS",l:"Gran novedad"}],
+   curi:'El primer SMS de la historia lo envió Neil Papworth el 3 de diciembre de 1992. Decía solo: "Feliz Navidad".',
+   musT:"Pop y eurodance de los 90s",musE:"POP & EURODANCE · 1991–1999",tec:"Digital GSM · 9.6 kbps · SMS"},
+  {gen:"3G",anio:"2001",tit:"Internet en tu bolsillo",sub:"WCDMA · Smartphones · Email móvil",
+   ph:"📲",phN:"BlackBerry 6210",phD:"Teclado QWERTY · Email · Internet · Favorito ejecutivo",
+   emp:"⬛",empN:"BlackBerry (RIM)",empF:"M. Lazaridis & J. Balsillie · Waterloo, Canadá · 1984",
+   empT:'BlackBerry fue tan adictivo que lo apodaron "CrackBerry". Obama se negó a cambiarlo por iPhone. En su mejor momento tenía 80 millones de usuarios activos en todo el mundo.',
+   datos:[{v:"384kbps",l:"Velocidad"},{v:"WCDMA",l:"Tecnología"},{v:"2001",l:"Lanzamiento"},{v:"Video",l:"Videollamada"}],
+   curi:"Obama se negó a entregar su BlackBerry al Servicio Secreto. Fue el primer presidente en usar email desde el cargo.",
+   musT:"Pop y R&B de los 2000s",musE:"POP & HIP-HOP · 2001–2008",tec:"WCDMA · 384 kbps · Videollamadas"},
+  {gen:"4G",anio:"2009",tit:"La revolución LTE",sub:"Streaming · Redes sociales · Era moderna",
+   ph:"📱",phN:"iPhone 4 / Samsung Galaxy S",phD:"Pantalla retina · App Store · Streaming HD",
+   emp:"🍎",empN:"Apple / Samsung",empF:"Steve Jobs & Wozniak · Cupertino, CA · 1976",
+   empT:"Steve Jobs presentó el iPhone en 2007 diciendo que iban a reinventar el teléfono. Con 4G el iPhone 4 lo logró. Samsung respondió con el Galaxy S. Nació la era del smartphone que vivimos hoy.",
+   datos:[{v:"100Mbps",l:"Velocidad"},{v:"LTE",l:"Tecnología"},{v:"2009",l:"Primer LTE"},{v:"HD",l:"Streaming"}],
+   curi:"Con 4G nacieron Instagram, Uber y Spotify. Netflix pasó de DVDs a 260 millones de suscriptores gracias al 4G.",
+   musT:"Spotify, YouTube Music · Era streaming",musE:"EDM & POP URBANO · 2009–2018",tec:"LTE · 100 Mbps · HD Streaming"},
+  {gen:"5G",anio:"2019",tit:"El futuro es ahora",sub:"IA en tu mano · IoT · Ciudades inteligentes",
+   ph:"🤖",phN:"iPhone 16 / Galaxy S25",phD:"IA integrada · 5G mmWave · Chip A18 · Cámara 200MP",
+   emp:"📱",empN:"Apple & Samsung",empF:"Líderes de la era 5G · 2019–presente",
+   empT:"Apple lanzó el iPhone 12 en 2020 como primer iPhone 5G. Samsung dominó Android con el Galaxy S25. La inteligencia artificial se convirtió en parte central del hardware de cada celular.",
+   datos:[{v:"10 Gbps",l:"Velocidad"},{v:"1 ms",l:"Latencia"},{v:"2019",l:"Lanzamiento"},{v:"IoT",l:"Conectividad"}],
+   curi:"El 5G tiene tan baja latencia que ya hay hospitales probando cirugías remotas con robots controlados en tiempo real desde otra ciudad.",
+   musT:"Reggaetón, trap y música con IA",musE:"URBANO & AI MUSIC · 2019–HOY",tec:"mmWave · 10 Gbps · IA + IoT"}
+];
+
+let cur=0, tabA='info', quizDone=false, currentYT=null;
+
+function abrir(i){cur=i;tabA='info';quizDone=false;render();document.getElementById('exhibit').style.display='block';document.getElementById('portada').style.display='none';window.scrollTo(0,0);}
+function volver(){document.getElementById('exhibit').style.display='none';document.getElementById('portada').style.display='block';window.scrollTo(0,0);}
+function nav(i){cur=i;tabA='info';quizDone=false;render();window.scrollTo(0,0);}
+function tab(t){tabA=t;render();}
+
+function playSong(idx){
+  const song=SONGS[cur][idx];
+  currentYT=song.yt;
+  // Update playing state
+  document.querySelectorAll('.song-item').forEach((el,i)=>{
+    el.classList.toggle('playing',i===idx);
+    el.querySelector('.s-icon').textContent = i===idx ? '▶' : '🎵';
+  });
+  const wrap=document.getElementById('yt-player-wrap');
+  if(wrap){
+    wrap.innerHTML=`<div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/${song.yt}?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="yt-note">▲ Reproduciendo en el reproductor de arriba · ${song.name} — ${song.artist}</p>`;
+  }
+}
+
+function answerQuiz(optIdx){
+  const q=QUIZ[cur];
+  const opts=document.querySelectorAll('.quiz-opt');
+  const res=document.getElementById('quiz-res');
+  opts.forEach((o,i)=>{
+    o.disabled=true;
+    if(i===q.ans) o.classList.add('correct');
+    else if(i===optIdx && i!==q.ans) o.classList.add('wrong');
+  });
+  res.style.display='block';
+  if(optIdx===q.ans){
+    res.className='quiz-result res-ok';
+    res.innerHTML='✓ '+q.exp;
+  } else {
+    res.className='quiz-result res-no';
+    res.innerHTML='✗ Respuesta incorrecta. '+q.exp;
+  }
+}
+
+function render(){
+  const g=G[cur], p=PAL[cur], q=QUIZ[cur], songs=SONGS[cur];
+  let tl='';
+  G.forEach((_,i)=>{
+    const lc=i<cur?'p':'';
+    if(i>0)tl+=`<div class="tl-l ${lc}"></div>`;
+    tl+=`<div class="tl-d ${PAL[i].tl} ${i===cur?'cur':''}" onclick="nav(${i})" title="${G[i].gen}">${G[i].gen}</div>`;
+  });
+
+  let dat='';
+  g.datos.forEach(d=>dat+=`<div class="dat ${p.dat}"><div class="d-val">${d.v}</div><div class="d-lab">${d.l}</div></div>`);
+
+  let songItems='';
+  songs.forEach((s,i)=>{ songItems+=`<div class="song-item ${p.si}" onclick="playSong(${i})"><span class="s-icon">🎵</span><div class="s-info"><div class="s-name">${s.name}</div><div class="s-artist">${s.artist}</div></div><span class="s-dur">${s.dur}</span></div>`; });
+
+  let quizOpts='';
+  q.opts.forEach((o,i)=>{ quizOpts+=`<button class="quiz-opt ${p.qi}" onclick="answerQuiz(${i})">${o}</button>`; });
+
+  const tabs=`<div class="tabs-row ${p.tabs}">
+    <button class="tb ${p.tb} ${tabA==='info'?'act':''}" onclick="tab('info')">FICHA</button>
+    <button class="tb ${p.tb} ${tabA==='emp'?'act':''}" onclick="tab('emp')">EMPRESA</button>
+    <button class="tb ${p.tb} ${tabA==='mus'?'act':''}" onclick="tab('mus')">🎵 MÚSICA</button>
+    <button class="tb ${p.tb} ${tabA==='quiz'?'act':''}" onclick="tab('quiz')">❓ QUIZ</button>
+  </div>`;
+
+  const pI=`<div class="tab-pnl ${tabA==='info'?'act':''}">
+    <div class="deco-div ${p.dv}">— ✿ —</div>
+    <div class="vit ${p.vit}"><div class="ph-ico ${p.ph}">${g.ph}</div><div class="${p.ph}"><div class="ph-nom">${g.phN}</div><div class="ph-desc">${g.phD}</div><div style="margin-top:6px;font-size:10px;opacity:0.6">✦ ${g.tec}</div></div></div>
+    <div class="datos">${dat}</div>
+    <div class="curi ${p.curi}">${g.curi}</div>
+  </div>`;
+
+  const pE=`<div class="tab-pnl ${tabA==='emp'?'act':''}">
+    <div class="deco-div ${p.dv}">— ✿ —</div>
+    <div class="emp-card ${p.ec}"><div class="e-ico ${p.ei}">${g.emp}</div><div><div class="e-nom">${g.empN}</div><div class="e-fun">${g.empF}</div></div></div>
+    <div class="e-txt ${p.et}">${g.empT}</div>
+  </div>`;
+
+  const pM=`<div class="tab-pnl ${tabA==='mus'?'act':''}">
+    <div class="deco-div ${p.dv}">— ✿ —</div>
+    <div class="mus-card ${p.mc}">
+      <div class="m-era-label">🎵 Era musical</div>
+      <div class="m-tit">${g.musT}</div>
+      <div class="m-era">${g.musE}</div>
+      <div class="songs-list">${songItems}</div>
+      <div id="yt-player-wrap"></div>
+    </div>
+    <p style="font-size:11px;font-family:'Cormorant Garamond',serif;font-style:italic;opacity:0.6;text-align:center;padding:0 0.5rem">Toca una canción para escucharla y viajar en el tiempo ✦</p>
+  </div>`;
+
+  const pQ=`<div class="tab-pnl ${tabA==='quiz'?'act':''}">
+    <div class="deco-div ${p.dv}">— ✿ —</div>
+    <div class="quiz-box ${p.quiz}">
+      <div class="quiz-lbl">❓ Pregunta de la era ${g.gen}</div>
+      <div class="quiz-q">${q.q}</div>
+      <div class="quiz-opts">${quizOpts}</div>
+      <div class="quiz-result" id="quiz-res"></div>
+    </div>
+  </div>`;
+
+  const prev=cur>0?`<button class="nb ${p.nb}" onclick="nav(${cur-1})">← ${G[cur-1].gen}</button>`:`<button class="nb ${p.nb} dis" disabled>←</button>`;
+  const next=cur<4?`<button class="nb ${p.nb}" onclick="nav(${cur+1})">${G[cur+1].gen} →</button>`:`<button class="nb ${p.nb} dis" disabled>→</button>`;
+  const dotsH=G.map((_,i)=>`<div class="dot ${PAL[i].dot} ${i===cur?'a':''}" onclick="nav(${i})"></div>`).join('');
+
+  document.getElementById('exhibit').innerHTML=`<div class="${p.ex}">
+    <div class="${p.hdr}">
+      <div class="hdr-deco">✦ ✿ ✦ ✿ ✦</div>
+      <div class="lbl-gen">GENERACIÓN · ${g.gen} · ${g.anio}</div>
+      <div class="tit-hdr">${g.tit}</div>
+      <div class="sub-hdr">${g.sub}</div>
+    </div>
+    <div class="timeline">${tl}</div>
+    ${tabs}${pI}${pE}${pM}${pQ}
+    <div class="nav-bar">${prev}<div class="dots">${dotsH}</div>${next}</div>
+    <button class="cerrar ${p.cerr}" onclick="volver()">✿ Volver al inicio</button>
+  </div>`;
+}
+</script>
+</body>
+</html>
